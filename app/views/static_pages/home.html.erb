@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+	<h3>Hello, <%= current_user.name %>!</h3>
+<% else %>
+	<h1>Hello world</h1>
+<% end %>
+
