@@ -4,14 +4,14 @@
       <div class="row">
          <div class="col-md-4">
          	<div class="image_size">
-         		<% if @user.avatar.nil? %>
-         			<% if @user.gender == 0 %>
-         				<%= image_tag "female.png" %>
-         			<% else %>
-         				<%= image_tag "male.png" %>
-         			<% end %>
+         		<% if @user.avatar.present? %>
+                  <%= image_tag @user.avatar %>
          		<% else %>
-         			<%= image_tag @user.avatar %>
+         			<% if @user.gender == 0 %>
+                     <%= image_tag "female.png" %>
+                  <% else %>
+                     <%= image_tag "male.png" %>
+                  <% end %>
          		<% end %>
          	</div>
          </div>
