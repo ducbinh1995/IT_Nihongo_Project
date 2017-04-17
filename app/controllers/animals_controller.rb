@@ -10,6 +10,8 @@ class AnimalsController < ApplicationController
   # GET /animals/1
   # GET /animals/1.json
   def show
+     @animal = Animal.find(params[:id])
+     @images = Image.where(animal_id: @animal.id).order(created_at: :desc)
   end
 
   # GET /animals/new

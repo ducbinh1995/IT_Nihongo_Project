@@ -30,5 +30,7 @@
   <%= @image.created_at %>
 </p>
 
-<%= link_to 'Edit', edit_image_path(@image) %> |
+<% if user_signed_in? && (@image.user_id == current_user.id) %>
+    <%= link_to 'Edit', edit_image_path(@image), class: "btn btn-primary" %>
+<% end %>
 <%= link_to 'Back', images_path %>
