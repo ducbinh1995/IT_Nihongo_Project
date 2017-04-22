@@ -1,6 +1,32 @@
 <h1>Editing Image</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="image_size">
+				<%= image_tag @image.file %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<%= form_for(@image) do |f| %>
+			<div class="field">
+    			<%= f.label 'Animal' %>
+    			<%= f.select :animal_id, options_from_collection_for_select(@animals, 'id', 'name') %>
+  			</div>
 
-<%= render 'form', image: @image %>
+  			<div class="field">
+    			<%= f.label :title %>
+    			<%= f.text_field :title %>
+  			</div>
 
-<%= link_to 'Show', @image %> |
-<%= link_to 'Back', images_path %>
+  			<div class="field">
+    			<%= f.label :description %>
+    			<%= f.text_area :description %>
+  			</div>
+  			<div class="action">
+				<%= f.submit "Edit Image", class: "btn btn-primary"%>
+			</div>
+  			<% end %>
+		</div>
+	</div>
+</div>
+
