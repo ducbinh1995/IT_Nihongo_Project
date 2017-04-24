@@ -34,24 +34,30 @@
   <strong>Give a comment: </strong>
 </p>
 <%= form_for(@image_comment) do |f| %>
-<div class= "field">
-<%= f.label :comment %><br>
-<%= f.text_field :comment %>
-<%= f.hidden_field :image_id, :value => @image.id %>
-</div>
-<div class="actions">
-<%= f.submit %>
-</div>
+  <div class= "field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+    <%= f.hidden_field :image_id, :value => @image.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 <% end %>
 
 <p>
   <strong>Comments List:</strong>
 </p>
+
 <ul>
-<% @image.image_comment.each do |image_comment|%>
-<li><%= image_comment.comment %>
-(<i><%= image_comment.user_id %></i>)</li>
-<% end %>
+  <% @image.image_comment.each do |image_comment|%>
+  <li>
+    <%= image_comment.comment %>
+    (<i><%= image_comment.user.name %></i>)
+    <% if user_signed_in? && (image_comment.user_id == current_user.id) %>
+      <%= link_to "Delete comment", {:controller => "image_comments", :action => 'destroy', :id => image_comment.id}, :confirm => "Are you sure you want to delete this comment?", :method => :delete %>
+    <% end %>
+  </li>
+  <% end %>
 </ul>
 
 <% if user_signed_in? && (@image.user_id == current_user.id) %>

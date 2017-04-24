@@ -58,7 +58,8 @@ class ImageCommentsController < ApplicationController
   def destroy
     @image_comment.destroy
     respond_to do |format|
-      format.html { redirect_to image_comments_url, notice: 'Image comment was successfully destroyed.' }
+      url = "/images/" + @image_comment.image_id.to_s
+      format.html { redirect_to url, notice: 'Image comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
