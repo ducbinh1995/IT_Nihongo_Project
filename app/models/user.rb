@@ -7,4 +7,5 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :gender, presence: true
   mount_uploader :avatar, AvatarUploader
+  has_many :images
 end

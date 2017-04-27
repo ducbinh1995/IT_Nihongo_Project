@@ -1,5 +1,3 @@
-<br>
-<br>
 <div class="container">
       <div class="row">
          <div class="col-md-4">
@@ -39,5 +37,23 @@
             <% end %>
             <br>
          </div>
+      </div>
+      <div class="col-xs-12 col-md-12">
+        <h4 class=" page-header">My list animal</h4>
+    </div>
+      <div class="row">
+         <% @user.images.each do |image| %>
+            <div class="col-xs-6 col-md-3">
+                <div class="thumbnail">
+                    <%= link_to image_path(image.id),  class: "", title: image.title do %>
+                    <%= image_tag(image.file, class: 'img-responsive') %>
+                    <% end %>
+                    <div class="caption center">
+                        <label class=""><%= image.title %></label>
+                        <div><%= image.description %></div>
+                    </div>
+                </div>
+            </div>
+         <% end %>
       </div>
 </div>
