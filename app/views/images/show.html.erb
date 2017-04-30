@@ -25,11 +25,6 @@
   <%= image_tag @image.file %>
 </p>
 
-<p>
-  <strong>Created at:</strong>
-  <%= @image.created_at %>
-</p>
-
 <%= form_for(@image_comment) do |f| %>
   <div class= "field">
     <%= f.label :comment %><br>
