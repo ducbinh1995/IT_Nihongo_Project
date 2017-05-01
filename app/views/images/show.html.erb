@@ -1,6 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="animal-image">
+      <%= image_tag @image.file %>
+    </div>
+  </div>
+  <div class="col-md-4 animal-image-font">
+    <br>
+    <br>
+    <ul>
+      <li>
+        <div class="animal-image-font">
+          <strong><%= @image.title %></strong>
+        </div>
+      </li>
+      <li>
+        <div class="animal-image-font">
+          <strong>Owner: </strong>
+          <%= @image.user.name %>
+        </div>
+      </li>
+      <li>
+        <div class="animal-image-font">
+          <strong>Genre: </strong>
+          <%= @image.animal.name %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
-<p>
+<div class="row">
+  <strong>Description</strong>
+  <%= @image.description %>
+</div>
+
+<!-- <p>
   <strong>User:</strong>
   <%= @image.user.name %>
 </p>
@@ -23,7 +57,7 @@
 <p>
   <strong>File:</strong>
   <%= image_tag @image.file %>
-</p>
+</p> -->
 
 <%= form_for(@image_comment) do |f| %>
   <div class= "field">
