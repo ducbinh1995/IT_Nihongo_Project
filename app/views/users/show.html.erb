@@ -1,7 +1,69 @@
-<div class="container">
-      <div class="row">
-         <div class="col-md-4">
-         	<div class="image_size">
+<!--<div class="container">-->
+<!--      <div class="row">-->
+<!--         <div class="col-md-4">-->
+<!--         	<div class="image_size">-->
+<!--         		<% if @user.avatar.present? %>-->
+<!--                  <%= image_tag @user.avatar %>-->
+<!--         		<% else %>-->
+<!--         			<% if @user.gender == 0 %>-->
+<!--                     <%= image_tag "female.png" %>-->
+<!--                  <% else %>-->
+<!--                     <%= image_tag "male.png" %>-->
+<!--                  <% end %>-->
+<!--         		<% end %>-->
+<!--         	</div>-->
+<!--         </div>-->
+<!--         <div class="col-md-4">-->
+<!--         	  <br />-->
+<!--            <label>Email:  <%= @user.email %></label>-->
+<!--            <br>-->
+<!--            <label>User Name:  <%= @user.name %></label>-->
+<!--            <br>-->
+<!--            <label>Gender:  -->
+<!--               <% if @user.gender == 0 %>-->
+<!--                  Female-->
+<!--               <% else %>-->
+<!--                  Male-->
+<!--               <% end %>-->
+<!--            </label>-->
+<!--            <br>-->
+<!--            <% if user_signed_in? && (@user.id == current_user.id) %>-->
+<!--               <%= link_to "Change profile", edit_user_registration_path, class: "btn btn-primary" %>-->
+<!--            <% end %>-->
+<!--            <br>-->
+<!--         </div>-->
+<!--      </div>-->
+<!--      <div class="col-xs-12 col-md-12">-->
+<!--        <h4 class=" page-header">My list animal</h4>-->
+<!--    </div>-->
+<!--      <div class="row">-->
+<!--         <% @user.images.each do |image| %>-->
+<!--            <div class="col-xs-6 col-md-3">-->
+<!--                <div class="thumbnail">-->
+<!--                    <%= link_to image_path(image.id),  class: "", title: image.title do %>-->
+<!--                    <%= image_tag(image.file, class: 'img-responsive') %>-->
+<!--                    <% end %>-->
+<!--                    <div class="caption center">-->
+<!--                        <label class=""><%= image.title %></label>-->
+<!--                        <div><%= image.description %></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--         <% end %>-->
+<!--      </div>-->
+<!--</div>-->
+
+
+
+  <!--The Grid -->
+  <div class="w3-row-padding">
+  
+     <!--Left Column -->
+    <div class="w3-third">
+
+      <div class="w3-white w3-text-grey w3-card-4" >
+              <!--avatar-->
+        <div class="image_size w3-center">
          		<% if @user.avatar.present? %>
                   <%= image_tag @user.avatar %>
          		<% else %>
@@ -11,33 +73,37 @@
                      <%= image_tag "male.png" %>
                   <% end %>
          		<% end %>
-         	</div>
-         </div>
-         <div class="col-md-4">
-         	  <br />
-            <label>Email:  <%= @user.email %></label>
-            <br>
-            <label>User Name:  <%= @user.name %></label>
-            <br>
-            <label>Gender:  
+        </div>
+        <!--info-->
+        <div class="w3-container">
+            <h2 class="w3-text-teal "> <%= @user.name %></h2>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i><%= @user.email %></p>
+          <p><i class="fa fa-intersex fa-fw w3-margin-right w3-large w3-text-teal"></i>
                <% if @user.gender == 0 %>
                   Female
                <% else %>
                   Male
                <% end %>
-            </label>
-            <br>
+          </p>
+          <!--button-->
+        <p>
             <% if user_signed_in? && (@user.id == current_user.id) %>
                <%= link_to "Change profile", edit_user_registration_path, class: "btn btn-primary" %>
             <% end %>
-            <br>
-         </div>
-      </div>
-      <div class="col-xs-12 col-md-12">
-        <h4 class=" page-header">My list animal</h4>
+        </p>
+        
+        </div>
+      </div><br>
+
+     <!--End Left Column -->
     </div>
-      <div class="row">
-         <% @user.images.each do |image| %>
+
+     <!--Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-file-photo-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My List Animal</h2>
+          <% @user.images.each do |image| %>
             <div class="col-xs-6 col-md-3">
                 <div class="thumbnail">
                     <%= link_to image_path(image.id),  class: "", title: image.title do %>
@@ -51,4 +117,12 @@
             </div>
          <% end %>
       </div>
-</div>
+
+      
+
+     <!--End Right Column -->
+    </div>
+    
+   <!--End Grid -->
+  </div>
+  
