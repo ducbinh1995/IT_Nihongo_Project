@@ -34,7 +34,11 @@
                     <% end %>
                     <div class="caption center">
                         <label class=""><%= img.title %></label>
-                        <div><%= img.description %></div>
+                        <% if img.description.length > 10%>
+                          <div><%= img.description[0..10] %>...</div>
+                        <% else %>
+                          <div><%= img.description %></div>
+                        <% end %>
                     </div>
                 </div>
             </div>

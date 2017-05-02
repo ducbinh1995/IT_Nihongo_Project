@@ -46,7 +46,7 @@
     
       <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
         <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-file-photo-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My List Animal</h2>
-          <% @user.images.each do |image| %>
+          <% @my_image.each do |image| %>
             <div class="col-xs-6 col-md-3">
                 <div class="thumbnail">
                     <%= link_to image_path(image.id),  class: "", title: image.title do %>
@@ -54,15 +54,19 @@
                     <% end %>
                     <div class="caption center">
                         <label class=""><%= image.title %></label>
-                        <div><%= image.description %></div>
+                        <% if image.description.length > 10%>
+                          <div><%= image.description[0..10] %>...</div>
+                        <% else %>
+                          <div><%= image.description %></div>
+                        <% end %>
                     </div>
                 </div>
             </div>
          <% end %>
       </div>
-
-      
-
+      <div>
+        <%= paginate @my_image, theme: 'twitter-bootstrap-3' %>
+      </div>
      <!--End Right Column -->
     </div>
     
