@@ -11,7 +11,11 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
-   @image_comment = ImageComment.new
+   @image_comments ||= ImageComment.where(:image_id => @image.id)
+    respond_to do |format|
+      format.html
+      format.json { render json: @image_comments }
+    end
   end
 
   # GET /images/new

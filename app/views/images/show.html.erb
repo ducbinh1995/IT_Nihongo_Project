@@ -59,14 +59,14 @@
   <%= image_tag @image.file %>
 </p> -->
 
-<%= form_for(@image_comment) do |f| %>
+<%= form_for :image_comment, method: :post, remote: true do |f| %>
   <div class= "field">
     <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-    <%= f.hidden_field :image_id, :value => @image.id %>
+    <%= f.text_field :comment, id: "cmt-field" %>
+    <%= f.hidden_field :image_id, id: "img-id-field", :value => @image.id %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="btn btn-primary" id="btn-cmt">
+     Create comment
   </div>
 <% end %>
 
@@ -74,7 +74,7 @@
   <strong>Comments List:</strong>
 </p>
 
-<ul>
+<ul id="cmt-section">
   <% @image.image_comment.each do |image_comment|%>
   <div class="row">
     <div class="comment">
