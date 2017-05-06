@@ -1,10 +1,14 @@
 class ImageCommentsController < ApplicationController
   before_action :set_image_comment, only: [:show, :edit, :update, :destroy]
+  include ApplicationHelper
 
   # GET /image_comments
   # GET /image_comments.json
   def index
-    @image_comments = ImageComment.all
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: @image_comment }
+    # end
   end
 
   # GET /image_comments/1
@@ -24,19 +28,9 @@ class ImageCommentsController < ApplicationController
   # POST /image_comments
   # POST /image_comments.json
   def create
-    @image_comment = ImageComment.new(image_comment_params)
-    @image_comment.user_id = current_user.id
-    
-    respond_to do |format|
-      if @image_comment.save
-        url = "/images/" + @image_comment.image_id.to_s
-        format.html { redirect_to url, notice: 'Image comment was successfully created.' }
-        format.json { render :show, status: :created, location: @image_comment }
-      else
-        format.html { render :new }
-        format.json { render json: @image_comment.errors, status: :unprocessable_entity }
-      end
-    end
+    @image_comment = ImageComment.new
+    params[:user_id] = current_user.id
+    @image_comment.update_attributes (image_comment_params) 
   end
 
   # PATCH/PUT /image_comments/1
@@ -73,6 +67,6 @@ class ImageCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_comment_params
-      params.require(:image_comment).permit(:user_id, :image_id, :comment)
+      params.permit(:user_id, :image_id, :comment)
     end
 end

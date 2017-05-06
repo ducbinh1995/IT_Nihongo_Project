@@ -53,44 +53,21 @@
     <strong>Description</strong>
     <%= @image.description %>
 </div>
-<!-- <p>
-    <strong>User:</strong>
-    <%= @image.user.name %>
-    </p>
-    
-    <p>
-    <strong>Animal:</strong>
-    <%= @image.animal.name %>
-    </p>
-    
-    <p>
-    <strong>Title:</strong>
-    <%= @image.title %>
-    </p>
-    
-    <p>
-    <strong>Description:</strong>
-    <%= @image.description %>
-    </p>
-    
-    <p>
-    <strong>File:</strong>
-    <%= image_tag @image.file %>
-    </p> -->
-<%= form_for(@image_comment) do |f| %>
-<div class= "field">
+
+<%= form_for :image_comment, method: :post, remote: true do |f| %>
+  <div class= "field">
     <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-    <%= f.hidden_field :image_id, :value => @image.id %>
-</div>
-<div class="actions">
-    <%= f.submit %>
-</div>
+    <%= f.text_field :comment, id: "cmt-field" %>
+    <%= f.hidden_field :image_id, id: "img-id-field", :value => @image.id %>
+  </div>
+  <div class="btn btn-primary" id="btn-cmt">
+     Create comment
+  </div>
 <% end %>
 <p>
     <strong>Comments List:</strong>
 </p>
-<ul>
+<ul id="cmt-section">
     <% @image.image_comment.each do |image_comment|%>
     <div class="row">
         <div class="comment">

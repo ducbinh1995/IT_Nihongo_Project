@@ -15,6 +15,11 @@ class ImagesController < ApplicationController
    @likes = ImageLike.where(image_id: @image.id).count
     if user_signed_in?
       @current_user_like = ImageLike.where(image_id: @image.id).where(user_id: current_user.id).presence
+      @image_comments ||= ImageComment.where(:image_id => @image.id)
+      respond_to do |format|
+        format.html
+        format.json { render json: @image_comments }
+      end
     end
   end
 
