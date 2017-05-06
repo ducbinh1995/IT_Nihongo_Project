@@ -9,5 +9,4 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :images
   has_many :image_likes
-  has_many :images, through: :image_likes
 end
