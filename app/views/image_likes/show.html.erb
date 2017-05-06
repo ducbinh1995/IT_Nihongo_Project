@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @image_like.user_id %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= @image_like.image_id %>
+</p>
+
+<%= link_to 'Edit', edit_image_like_path(@image_like) %> |
+<%= link_to 'Back', image_likes_path %>

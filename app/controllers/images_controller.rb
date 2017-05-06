@@ -1,5 +1,5 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   # GET /images
@@ -12,6 +12,10 @@ class ImagesController < ApplicationController
   # GET /images/1.json
   def show
    @image_comment = ImageComment.new
+   @likes = ImageLike.where(image_id: @image.id).count
+    if user_signed_in?
+      @current_user_like = ImageLike.where(image_id: @image.id).where(user_id: current_user.id).presence
+    end
   end
 
   # GET /images/new

@@ -1,105 +1,120 @@
 <div class="row">
-  <div class="col-md-4">
-    <div class="animal-image">
-      <%= image_tag @image.file %>
+    <div class="col-md-4">
+        <div class="animal-image">
+            <%= image_tag @image.file %>
+        </div>
     </div>
-  </div>
-  <div class="col-md-4 animal-image-font">
-    <br>
-    <br>
-    <ul>
-      <li>
-        <div class="animal-image-font">
-          <strong><%= @image.title %></strong>
-        </div>
-      </li>
-      <li>
-        <div class="animal-image-font">
-          <strong>Owner: </strong>
-          <%= @image.user.name %>
-        </div>
-      </li>
-      <li>
-        <div class="animal-image-font">
-          <strong>Genre: </strong>
-          <%= @image.animal.name %>
-        </div>
-      </li>
-    </ul>
-  </div>
+    <div class="col-md-4 animal-image-font">
+        <br>
+        <br>
+        <ul>
+            <li>
+                <div class="animal-image-font">
+                    <strong><%= @image.title %></strong>
+                </div>
+            </li>
+            <li>
+                <div class="animal-image-font">
+                    <strong>Owner: </strong>
+                    <%= @image.user.name %>
+                </div>
+            </li>
+            <li>
+                <div class="animal-image-font">
+                    <strong>Genre: </strong>
+                    <%= @image.animal.name %>
+                </div>
+            </li>
+            <li>
+                <div class="animal-image-font">
+                    <div class="" style="">
+                        <%= @likes %> people liked this image
+                    </div>
+                
+                </div>
+            </li>
+            <li>
+                <div class="animal-image-font">
+                
+                    <% if user_signed_in? %>
+                    <div class="" style="">
+                        <%= form_tag("/image_likes/" + @image.id.to_s, method: :PUT) do %>
+                        <%= submit_tag @current_user_like ? "Unlike" : "Like", class: "btn btn-primary" %>
+                        <% end %>
+                    </div>
+                    
+                    <% end %>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
-
 <div class="row">
-  <strong>Description</strong>
-  <%= @image.description %>
+    <strong>Description</strong>
+    <%= @image.description %>
 </div>
-
 <!-- <p>
-  <strong>User:</strong>
-  <%= @image.user.name %>
-</p>
-
-<p>
-  <strong>Animal:</strong>
-  <%= @image.animal.name %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @image.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @image.description %>
-</p>
-
-<p>
-  <strong>File:</strong>
-  <%= image_tag @image.file %>
-</p> -->
-
+    <strong>User:</strong>
+    <%= @image.user.name %>
+    </p>
+    
+    <p>
+    <strong>Animal:</strong>
+    <%= @image.animal.name %>
+    </p>
+    
+    <p>
+    <strong>Title:</strong>
+    <%= @image.title %>
+    </p>
+    
+    <p>
+    <strong>Description:</strong>
+    <%= @image.description %>
+    </p>
+    
+    <p>
+    <strong>File:</strong>
+    <%= image_tag @image.file %>
+    </p> -->
 <%= form_for(@image_comment) do |f| %>
-  <div class= "field">
+<div class= "field">
     <%= f.label :comment %><br>
     <%= f.text_field :comment %>
     <%= f.hidden_field :image_id, :value => @image.id %>
-  </div>
-  <div class="actions">
+</div>
+<div class="actions">
     <%= f.submit %>
-  </div>
+</div>
 <% end %>
-
 <p>
-  <strong>Comments List:</strong>
+    <strong>Comments List:</strong>
 </p>
-
 <ul>
-  <% @image.image_comment.each do |image_comment|%>
-  <div class="row">
-    <div class="comment">
-      <div class="img">
-        <% if image_comment.user.avatar.present? %>
-          <%= image_tag image_comment.user.avatar, class: "pull-left" %>
-        <% else %>
-          <% if image_comment.user.gender == 0 %>
-            <%= image_tag "female.png", class: "pull-left" %>
-          <% else %>
-            <%= image_tag "male.png", class: "pull-left" %>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="pull-left">
-        <br>
-        <span><strong><%= image_comment.user.name %></strong></span>
-        <span><%= image_comment.comment %></span>
-      </div>
+    <% @image.image_comment.each do |image_comment|%>
+    <div class="row">
+        <div class="comment">
+            <div class="img">
+                <% if image_comment.user.avatar.present? %>
+                <%= image_tag image_comment.user.avatar, class: "pull-left" %>
+                <% else %>
+                <% if image_comment.user.gender == 0 %>
+                <%= image_tag "female.png", class: "pull-left" %>
+                <% else %>
+                <%= image_tag "male.png", class: "pull-left" %>
+                <% end %>
+                <% end %>
+            </div>
+            <div class="pull-left">
+                <br>
+                <span><strong><%= image_comment.user.name %></strong></span>
+                <span><%= image_comment.comment %></span>
+            </div>
+        </div>
     </div>
-  </div>
-  <% end %>
+    <% end %>
 </ul>
-
 <% if user_signed_in? && (@image.user_id == current_user.id) %>
-    <%= link_to 'Edit Image', edit_image_path(@image), class: "btn btn-primary" %>
-    <%= link_to "Delete Image", {:controller => "images", :action => 'destroy', :id => @image.id}, :confirm => "Are you sure you want to delete this image?", :method => :delete, class: "btn btn-primary" %>
+<%= link_to 'Edit Image', edit_image_path(@image), class: "btn btn-primary" %>
+<%= link_to "Delete Image", {:controller => "images", :action => 'destroy', :id => @image.id}, :confirm => "Are you sure you want to delete this image?", :method => :delete, class: "btn btn-primary" %>
 <% end %>

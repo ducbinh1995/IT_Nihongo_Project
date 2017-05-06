@@ -16,6 +16,8 @@ gem 'bootstrap-kaminari-views'
 gem 'carrierwave'
 # Use bootstrap
 gem 'bootstrap-sass', '3.3.6'
+# Use toastr
+gem 'toastr-rails'
 # Use devise
 gem 'devise'
 # Use sqlite3 as the database for Active Record
