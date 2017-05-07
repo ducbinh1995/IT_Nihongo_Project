@@ -54,6 +54,7 @@
     <%= @image.description %>
 </div>
 
+<% if user_signed_in? %>
 <%= form_for :image_comment, method: :post, remote: true do |f| %>
   <div class= "field">
     <%= f.label :comment %><br>
@@ -63,6 +64,7 @@
   <div class="btn btn-primary" id="btn-cmt">
      Create comment
   </div>
+<% end %>
 <% end %>
 <p>
     <strong>Comments List:</strong>
