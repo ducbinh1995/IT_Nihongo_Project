@@ -52,11 +52,12 @@ class ImageCommentsController < ApplicationController
   # DELETE /image_comments/1.json
   def destroy
     @image_comment.destroy
-    respond_to do |format|
-      url = "/images/" + @image_comment.image_id.to_s
-      format.html { redirect_to url, notice: 'Image comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    # respond_to do |format|
+    #   url = "/images/" + @image_comment.image_id.to_s
+    #   format.html { redirect_to url, notice: 'Image comment was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
+    render destroy.js
   end
 
   private
