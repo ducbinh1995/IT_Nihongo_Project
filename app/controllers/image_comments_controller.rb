@@ -57,7 +57,6 @@ class ImageCommentsController < ApplicationController
     #   format.html { redirect_to url, notice: 'Image comment was successfully destroyed.' }
     #   format.json { head :no_content }
     # end
-    render destroy.js
   end
 
   private

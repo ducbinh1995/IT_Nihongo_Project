@@ -17,3 +17,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+.idea/
+public/
+db/development.sqlite3
+db/test.sqlite3
