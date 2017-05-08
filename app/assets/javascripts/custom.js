@@ -21,4 +21,16 @@ $(document).on('click', '#btn-cmt', function() {
         $('#cmt-field').val('');
     })
 });
-  
+
+function deletecmt(variable) {
+  var l = '/image_comments/' + variable;
+  $.ajax({
+    type:'DELETE',
+    url: l,
+    dataType: "json",
+  }).success(function(data){
+    console.log(data)
+    $('#cmt-section').load(document.URL + ' #cmt-section');
+    $('#cmt-field').val('');
+  });
+};
