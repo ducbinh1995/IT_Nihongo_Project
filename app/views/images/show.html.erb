@@ -1,38 +1,30 @@
-<div class="row">
+<div class="row w3-white">
     <div class="col-md-4">
         <div class="animal-image">
             <%= image_tag @image.file %>
         </div>
     </div>
-    <div class="col-md-4 animal-image-font">
+    <div class="col-md-4 animal-image-font ">
         <br>
         <br>
         <ul>
             <li>
-                <div class="animal-image-font">
+                <h5><%= @image.user.name %></h5>
+            </li>
+            <li>
+                <div class="animal-image-font w3-large">
                     <strong><%= @image.title %></strong>
                 </div>
             </li>
             <li>
-                <div class="animal-image-font">
-                    <strong>Owner: </strong>
-                    <%= @image.user.name %>
-                </div>
+                <div>
+                <%= @image.description %>
+            </div>
             </li>
             <li>
-                <div class="animal-image-font">
-                    <strong>Genre: </strong>
-                    <%= @image.animal.name %>
-                </div>
+                <span class="w3-tag w3-theme-d4"><%= @image.animal.name %></span>
             </li>
-            <li>
-                <div class="animal-image-font">
-                    <div class="" style="">
-                        <%= @likes %> people liked this image
-                    </div>
-                
-                </div>
-            </li>
+
             <li>
                 <div class="animal-image-font">
                 
@@ -44,60 +36,68 @@
                     </div>
                     
                     <% end %>
+                 </div>
+            </li>
+            
+             <li>
+                <div class="animal-image-font">
+                    <div class="w3-small" style="">
+                        <%= @likes %> people liked this image
+                    </div>
+                
                 </div>
             </li>
+ 
         </ul>
     </div>
 </div>
-<div class="row">
-    <strong>Description</strong>
-    <%= @image.description %>
-</div>
+<br>
+<div class="w3-row">
+    
+        <% if user_signed_in? %>
+            <%= form_for :image_comment, method: :post, remote: true do |f| %>
+                <div class= "field" >
+                    <%= f.text_area :comment,  :size => "100%x20%", id: "cmt-field" %>
+                    <%= f.hidden_field :image_id, id: "img-id-field", :value => @image.id %>
+                </div>
+            <div class="w3-btn w3-blue-grey w3-margin-bottom" id="btn-cmt">
+                 Create comment
+              </div>
+            <% end %>
+        <% end %>
 
-<% if user_signed_in? %>
-<%= form_for :image_comment, method: :post, remote: true do |f| %>
-  <div class= "field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment, id: "cmt-field" %>
-    <%= f.hidden_field :image_id, id: "img-id-field", :value => @image.id %>
-  </div>
-  <div class="btn btn-primary" id="btn-cmt">
-     Create comment
-  </div>
-<% end %>
-<% end %>
-<p>
-    <strong>Comments List:</strong>
-</p>
-<ul id="cmt-section">
+</div>   
+<ul class="w3-ul w3-card-4 w3-white" id="cmt-section">
     <% @image.image_comment.each do |image_comment|%>
-        <div class="row">
+        <li class="w3-padding-16">
+            <% if user_signed_in? && (image_comment.user_id == current_user.id) %>
+                  <!--<span class="btn btn-delete w3-right " id="del-cmt" onclick="deletecmt(<%= image_comment.id %>)">-->
+                  <!--  Delete-->
+                  <!--</span>-->
+                  <span id="del-cmt" onclick="deletecmt(<%= image_comment.id %>)"  
+                    class="w3-button w3-red w3-xlarge w3-right">×</span>
+                <% end %>
             <div class="comment">
                 <div class="img">
                     <% if image_comment.user.avatar.present? %>
-                    <%= image_tag image_comment.user.avatar, class: "pull-left" %>
+                        <%= image_tag image_comment.user.avatar, class: "w3-left w3-circle w3-margin-right" %>
                     <% else %>
-                    <% if image_comment.user.gender == 0 %>
-                    <%= image_tag "female.png", class: "pull-left" %>
-                    <% else %>
-                    <%= image_tag "male.png", class: "pull-left" %>
-                    <% end %>
+                        <% if image_comment.user.gender == 0 %>
+                            <%= image_tag "female.png", class: "w3-left w3-circle w3-margin-right" %>
+                        <% else %>
+                            <%= image_tag "male.png", class: "w3-left w3-circle w3-margin-right" %>
+                        <% end %>
                     <% end %>
                 </div>
-                <div class="pull-left">
-                    <br>
-                    <span><strong><%= image_comment.user.name %></strong></span>
-                    <span><%= image_comment.comment %></span>
-                </div>
-                <% if user_signed_in? && (image_comment.user_id == current_user.id) %>
-                  <div class="btn btn-delete" id="del-cmt" onclick="deletecmt(<%= image_comment.id %>)">
-                    Delete
-                  </div>
-                <% end %>
+                <span class="w3-large"><%= image_comment.user.name %></span>
+                <span><%= image_comment.comment %></span>
+                
             </div>
-        </div>
-
+        </li>
+    <br>
     <% end %>
+
+
 </ul>
 
 
