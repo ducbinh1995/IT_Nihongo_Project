@@ -10,8 +10,13 @@ class AnimalsController < ApplicationController
   # GET /animals/1
   # GET /animals/1.json
   def show
-     @animal = Animal.find(params[:id])
-     @images = Image.where(animal_id: @animal.id).order(created_at: :desc)
+    @animal = Animal.find(params[:id])
+    @sort = params[:sort]
+    if @sort== 'likes'
+      @images = Image.where(animal_id: @animal.id).left_joins(:image_likes).group("images.id").order("count(images.id) DESC").page(params[:page]).per(4)
+    else
+      @images = Image.where(animal_id: @animal.id).order(created_at: :desc).page(params[:page]).per(4)
+    end
   end
 
   # GET /animals/new

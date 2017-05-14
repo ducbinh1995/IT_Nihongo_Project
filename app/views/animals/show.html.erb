@@ -1,21 +1,29 @@
 <p id="notice"><%= notice %></p>
-<div>
-    <div class = "col-xs-9 col-md-9">
-        <div class = "btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Sort By <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li><a href="#">Date</a></li>
-                <li><a href="#">Like</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
 <div class="container">
     <div class="row page-header">
         <div class="col-md-4 col-xs-4">
             <%= image_tag @animal.avatar, class: 'img-responsive img-rounded' %>
         </div>
     </div>
+    <div class="row">
+        <div class = "col-xs-3 col-md-3 " class="btn-toolbar">
+            <div class = "btn-group">Sort by </div>
+            <div class = "btn-group">
+                <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+                    <%if @sort== 'likes' %>
+                    Like
+                    <% else %>
+                    Date
+                    <% end %>
+                     <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="?">Date</a></li>
+                    <li><a href="?sort=likes">Like</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </br>
     <div class="row">
         <% @images.each do |img| %> 
         
@@ -33,5 +41,8 @@
         
         <% end %>
     </div>
-    </p>
+    <div>
+        <%= paginate @images, theme: 'twitter-bootstrap-3', :params => { :sort => @sort} %>
+        
+    </div>
 </div>
