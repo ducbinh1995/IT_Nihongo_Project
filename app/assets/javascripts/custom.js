@@ -9,17 +9,12 @@ $(document).on('click', '#btn-cmt', function() {
         comment: cmt,
         image_id: img_id
       }
-    });
-    var l = '/images/' + img_id;
-    $.ajax({
-      type:'GET',
-      url: l,
-      dataType: "json",
     }).success(function(data){
-      console.log(data)
-        $('#cmt-section').load(document.URL + ' #cmt-section');
-        $('#cmt-field').val('');
-    })
+       var l = '/images/' + img_id;
+      $('#cmt-section').load(l + ' #cmt-section ');
+      $('#cmt-field').val('');
+    });
+
 });
 
 function deletecmt(variable) {
@@ -30,7 +25,8 @@ function deletecmt(variable) {
     dataType: "json",
   }).success(function(data){
     console.log(data)
-    $('#cmt-section').load(document.URL + ' #cmt-section');
+    $('#cmt-section').load(document.URL + ' #cmt-section > *');
     $('#cmt-field').val('');
   });
 };
+
