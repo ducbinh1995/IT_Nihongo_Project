@@ -11,10 +11,9 @@ $(document).on('click', '#btn-cmt', function() {
       }
     }).success(function(data){
        var l = '/images/' + img_id;
-      $('#cmt-section').load(l + ' #cmt-section ');
+      $('#cmt-section').load(l + ' #cmt-section >*');
       $('#cmt-field').val('');
     });
-
 });
 
 function deletecmt(variable) {
